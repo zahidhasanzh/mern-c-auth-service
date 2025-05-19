@@ -8,10 +8,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "node src/server.js",
+    "format:fix": "prettier . --write",
+    "format:check": "prettier . --check",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@types/node": "^22.15.19",
+    "prettier": "3.5.3",
     "typescript": "^5.8.3"
   }
 }
