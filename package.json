@@ -4,7 +4,6 @@
     "description": "The user management service",
     "license": "ISC",
     "author": "Zahid Hassan <zahidhasanzh000@gmail.com>",
-    "type": "commonjs",
     "main": "index.js",
     "scripts": {
         "dev": "node src/server.js",
@@ -30,5 +29,8 @@
             "npm run format:fix",
             "npm run lint:fix"
         ]
+    },
+    "dependencies": {
+        "dotenv": "^16.5.0"
     }
 }
