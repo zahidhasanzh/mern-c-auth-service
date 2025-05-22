@@ -27,7 +27,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Zahid',
                 lastName: 'Hassan',
-                email: 'zahid.spec@gamil.com',
+                email: 'zahid.spec.gmail.com',
                 password: 'secret',
             }
 
@@ -45,7 +45,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Zahid',
                 lastName: 'Hassan',
-                email: 'zahid.spec@gamil.com',
+                email: 'zahid.spec.gmail.com',
                 password: 'secret',
             }
 
@@ -65,7 +65,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Zahid',
                 lastName: 'Hassan',
-                email: 'zahid.spec@gamil.com',
+                email: 'zahid.spec.gmail.com',
                 password: 'secret',
             }
 
@@ -88,7 +88,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Zahid',
                 lastName: 'Hassan',
-                email: 'zahid.spec@gamil.com',
+                email: 'zahid.spec.gmail.com',
                 password: 'secret',
             }
 
@@ -111,7 +111,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Zahid',
                 lastName: 'Hassan',
-                email: 'zahid.spec@gamil.com',
+                email: 'zahid.spec.gmail.com',
                 password: 'secret',
             }
 
@@ -130,7 +130,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Zahid',
                 lastName: 'Hassan',
-                email: 'zahid.spec@gamil.com',
+                email: 'zahid.spec.gmail.com',
                 password: 'secret',
             }
 
@@ -151,7 +151,7 @@ describe('POST /auth/register', () => {
             const userData = {
                 firstName: 'Zahid',
                 lastName: 'Hassan',
-                email: 'zahid.spec@gamil.com',
+                email: 'zahid.spec.gmail.com',
                 password: 'secret',
             }
 
@@ -189,6 +189,27 @@ describe('POST /auth/register', () => {
             const userRepository = connection.getRepository(User)
             const users = await userRepository.find()
             expect(users).toHaveLength(0)
+        })
+    })
+
+    describe('Fields are not in proper format', () => {
+        it('should trim the email field', async () => {
+            //Arrange
+            const userData = {
+                firstName: 'Zahid',
+                lastName: 'Hassan',
+                email: ' zahid.spec.gmail.com ',
+                password: 'secret',
+            }
+            //Act
+            await request(app).post('/auth/register').send(userData)
+
+            //assert
+            const userRepository = connection.getRepository(User)
+            const users = await userRepository.find()
+            const user = users[0]
+
+            expect(user.email).toBe('zahid.spec.gmail.com')
         })
     })
 })
