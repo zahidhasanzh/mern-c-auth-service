@@ -27,12 +27,13 @@ export class UserService {
                 password: hashedPassword,
                 role: Roles.CUSTOMER,
             })
-        } catch {
-            const err = createHttpError(
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (err) {
+            const error = createHttpError(
                 500,
                 'Failed to store the data in the database',
             )
-            throw err
+            throw error
         }
     }
 }
