@@ -4,6 +4,7 @@ import { DataSource } from 'typeorm'
 import { AppDataSource } from '../../src/config/data-source'
 import { User } from '../../src/entity/User'
 import { Roles } from '../../src/constants'
+import { isJwt } from '../utils'
 
 describe('POST /auth/register', () => {
     let connection: DataSource
@@ -140,7 +141,6 @@ describe('POST /auth/register', () => {
             //Assert
             const userRepository = connection.getRepository(User)
             const users = await userRepository.find()
-            console.log(users[0].password)
             expect(users[0].password).not.toBe(userData.password)
             expect(users[0].password).toHaveLength(60)
             expect(users[0].password).toMatch(/^\$2b\$\d+\$/)
@@ -166,6 +166,46 @@ describe('POST /auth/register', () => {
             //Assert
             expect(response.statusCode).toBe(400)
             expect(users).toHaveLength(1)
+        })
+
+        it('should return access token and refresh token inside a cookie', async () => {
+            //Arrange
+            const userData = {
+                firstName: 'Zahid',
+                lastName: 'Hassan',
+                email: 'zahid@mern.space',
+                password: 'password',
+            }
+
+            //Act
+            const response = await request(app)
+                .post('/auth/register')
+                .send(userData)
+
+            interface Headers {
+                ['set-cookie']: string[]
+            }
+            //Assert
+            let accessToken = null
+            let refreshToken = null
+            const cookies =
+                (response.headers as unknown as Headers)['set-cookie'] || []
+
+            cookies.forEach((cookie) => {
+                if (cookie.startsWith('accessToken=')) {
+                    accessToken = cookie.split(';')[0].split('=')[1]
+                }
+
+                if (cookie.startsWith('refreshToken=')) {
+                    refreshToken = cookie.split(';')[0].split('=')[1]
+                }
+            })
+
+            expect(accessToken).not.toBe(null)
+            expect(refreshToken).not.toBe(null)
+
+            expect(isJwt(accessToken)).toBeTruthy()
+            expect(isJwt(refreshToken)).toBeTruthy()
         })
     })
 
