@@ -73,10 +73,10 @@ describe('POST /tenants', () => {
                 address: 'Tenant Address',
             }
 
-            const responsive = await request(app)
+            const response = await request(app)
                 .post('/tenants')
                 .send(TenantData)
-            expect(responsive.statusCode).toBe(401)
+            expect(response.statusCode).toBe(401)
 
             const tenantRepository = connection.getRepository(Tenant)
             const tenants = await tenantRepository.find()
@@ -94,12 +94,12 @@ describe('POST /tenants', () => {
                 address: 'Tenant Address',
             }
 
-            const responsive = await request(app)
+            const response = await request(app)
                 .post('/tenants')
                 .set('Cookie', [`accessToken=${managerToken}`])
                 .send(TenantData)
 
-            expect(responsive.statusCode).toBe(403)
+            expect(response.statusCode).toBe(403)
 
             const tenantRepository = connection.getRepository(Tenant)
             const tenants = await tenantRepository.find()

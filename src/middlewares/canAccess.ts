@@ -15,6 +15,7 @@ export const canAccess = (roles: string[]) => {
             next(error)
             return
         }
+
         next()
     }
 }
