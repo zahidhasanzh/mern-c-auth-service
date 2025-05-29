@@ -15,6 +15,8 @@ export default tseslint.config(
             'scripts/generateKeys.mjs',
             'scripts/convertPemToJwk.mjs',
             'jest.config.ts',
+            '**/*.spec.ts',
+            'tests/',
         ],
     },
     {
