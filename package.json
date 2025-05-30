@@ -10,7 +10,7 @@
          "build": "tsc",
         "format:fix": "prettier . --write",
         "format:check": "prettier . --check",
-        "lint": "eslint .",
+        "lint:check": "eslint .",
         "lint:fix": "eslint . --fix",
         "test": "jest --no-cache --coverage --all --runInBand",
         "test:watch": "jest --watch --runInBand",
