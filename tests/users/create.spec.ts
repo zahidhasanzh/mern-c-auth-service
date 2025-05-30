@@ -27,8 +27,13 @@ describe('POST /users', () => {
         jwks.stop()
     })
 
+    // afterAll(async () => {
+    //     await connection.destroy()
+    // })
     afterAll(async () => {
-        await connection.destroy()
+        if (connection?.destroy) {
+            await connection.destroy()
+        }
     })
 
     describe('Given all fields', () => {

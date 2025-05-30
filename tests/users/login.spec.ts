@@ -19,8 +19,14 @@ describe('POST /auth/login', () => {
         await connection.synchronize()
     })
 
+    // afterAll(async () => {
+    //     await connection.destroy()
+    // })
+
     afterAll(async () => {
-        await connection.destroy()
+        if (connection?.destroy) {
+            await connection.destroy()
+        }
     })
 
     describe('Given all fields', () => {
