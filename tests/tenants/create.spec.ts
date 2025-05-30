@@ -27,11 +27,17 @@ describe('POST /tenants', () => {
         })
     })
 
-    afterAll(async () => {
-        await connection.destroy()
-    })
+    // afterAll(async () => {
+    //     await connection.destroy()
+    // })
     afterEach(() => {
         jwks.stop()
+    })
+
+    afterAll(async () => {
+        if (connection?.destroy) {
+            await connection.destroy()
+        }
     })
 
     describe('Given all fields', () => {
