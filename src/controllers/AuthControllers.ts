@@ -11,10 +11,10 @@ import { Roles } from '../constants'
 
 export class AuthController {
     constructor(
-        private userService: UserService,
-        private logger: Logger,
-        private tokenService: TokenService,
-        private credentialService: CredentialService,
+        private readonly userService: UserService,
+        private readonly logger: Logger,
+        private readonly tokenService: TokenService,
+        private readonly credentialService: CredentialService,
     ) {}
 
     async register(
