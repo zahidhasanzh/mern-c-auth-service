@@ -15,6 +15,6 @@ module.exports = {
         'src/**/*.ts',
         '!tests/**',
         '!**/node_modules/**',
-        '!src/init-admin-user/**/*',
+        '!src/init-admin-user/**',
     ],
 }
