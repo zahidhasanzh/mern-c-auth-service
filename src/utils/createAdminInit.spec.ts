@@ -53,6 +53,5 @@ test('should log warning if env variables are missing', async () => {
     process.env.ADMIN_PASSWORD = ''
 
     await createAdminInit()
-
     expect(mockCreate).not.toHaveBeenCalled()
 })
