@@ -8,8 +8,11 @@ const startServer = async () => {
     const PORT = Config.PORT
     try {
         await AppDataSource.initialize().then(async () => {
-            await initAdminUser()
+            if (process.env.NODE_ENV !== 'test') {
+                await initAdminUser()
+            }
         })
+
         logger.info('Database connected successfully.')
         app.listen(PORT, () => {
             logger.info('server listing on port', { port: PORT })
