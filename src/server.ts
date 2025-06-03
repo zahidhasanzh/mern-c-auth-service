@@ -2,16 +2,11 @@ import app from './app'
 import { Config } from './config'
 import { AppDataSource } from './config/data-source'
 import logger from './config/logger'
-import { initAdminUser } from './init-admin-user/initAdminUser'
 
 const startServer = async () => {
     const PORT = Config.PORT
     try {
-        await AppDataSource.initialize().then(async () => {
-            if (process.env.NODE_ENV !== 'test') {
-                await initAdminUser()
-            }
-        })
+        await AppDataSource.initialize()
 
         logger.info('Database connected successfully.')
         app.listen(PORT, () => {
