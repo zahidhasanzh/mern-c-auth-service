@@ -1,13 +1,19 @@
 import 'reflect-metadata'
 import express, { NextFunction, Request, Response } from 'express'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import logger from './config/logger'
 import { HttpError } from 'http-errors'
 import authRouter from './routes/auth'
 import tenantRouter from './routes/tenants'
 import userRouter from './routes/user'
+import { Config } from './config'
+
 const app = express()
 
+const ALLOWED_DOMAINS = [Config.ADMIN_UI_DOMAIN]
+
+app.use(cors({ origin: ALLOWED_DOMAINS as string[], credentials: true }))
 app.use(express.static('public'))
 
 app.use(express.json())
