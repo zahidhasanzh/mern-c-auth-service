@@ -32,7 +32,7 @@ describe('Admin User Creation', () => {
         })
 
         expect(admin).toBeDefined()
-        expect(admin?.role).toBe('ADMIN')
+        expect(admin?.role).toBe('admin')
     })
 
     it('should not create duplicate admin user', async () => {
