@@ -1,4 +1,9 @@
-import express, { Response, NextFunction, RequestHandler } from 'express'
+import express, {
+    Request,
+    Response,
+    NextFunction,
+    RequestHandler,
+} from 'express'
 import authenticate from '../middlewares/authenticate'
 import { canAccess } from '../middlewares/canAccess'
 import { Roles } from '../constants'
@@ -10,7 +15,6 @@ import logger from '../config/logger'
 import updateUserValidator from '../validators/update-user-validator'
 import { UpdateUserRequest } from '../types'
 import listUsersValidator from '../validators/list-users-validator'
-import { Request } from 'express-jwt'
 
 const router = express.Router()
 
