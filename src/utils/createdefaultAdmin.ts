@@ -24,7 +24,7 @@ export const createDefaultAdmin = async (dataSource: DataSource) => {
         lastName: process.env.ADMIN_LAST_NAME!,
         email: adminEmail,
         password: hashedPassword,
-        role: 'ADMIN',
+        role: 'admin',
     })
 
     await userRepository.save(adminUser)
