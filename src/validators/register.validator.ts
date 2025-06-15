@@ -31,5 +31,3 @@ export default checkSchema({
         },
     },
 })
-
-//export default [body("email").notEmpty().withMessage("Email is required")]
