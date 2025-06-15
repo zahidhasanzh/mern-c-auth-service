@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { User } from '../entity/User'
 import { LimitedUserData, UserData, UserQueryParams } from '../types'
 import createHttpError from 'http-errors'
+import logger from '../config/logger'
 
 export class UserService {
     constructor(private readonly userRepository: Repository<User>) {}
@@ -34,11 +35,11 @@ export class UserService {
                 role,
                 tenant: tenantId ? { id: tenantId } : undefined,
             })
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (err) {
+            logger.error('Database save failed', err)
             const error = createHttpError(
                 500,
-                'Failed to store the data in the database',
+                `Failed to store the data in the database: ${(err as Error).message}`,
             )
             throw error
         }
