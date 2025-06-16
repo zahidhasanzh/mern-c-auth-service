@@ -34,7 +34,7 @@ export class AuthController {
             firstName,
             lastName,
             email,
-            password: '*****',
+            password: 'mypassword',
         })
 
         try {
@@ -96,7 +96,7 @@ export class AuthController {
 
         this.logger.debug('New request to login a user', {
             email,
-            password: '*****',
+            password: 'mypassword',
         })
 
         try {

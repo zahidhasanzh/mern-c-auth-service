@@ -5,16 +5,12 @@ export default checkSchema(
         q: {
             trim: true,
             customSanitizer: {
-                options: (value: unknown) => {
-                    return value ?? value
-                },
+                options: (value: unknown) => value ?? '',
             },
         },
         role: {
             customSanitizer: {
-                options: (value: unknown) => {
-                    return value ?? value
-                },
+                options: (value: unknown) => value ?? '',
             },
         },
         currentPage: {
