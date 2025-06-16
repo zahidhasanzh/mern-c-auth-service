@@ -14,7 +14,7 @@ import { canAccess } from '../middlewares/canAccess'
 import { Roles } from '../constants'
 import tenantValidator from '../validators/tenant-validator'
 import { CreateTenantRequest } from '../types'
-import listUserValidator from '../validators/list-users-validator'
+import listTenantsValidator from '../validators/list-tenants-validator'
 
 const router = express.Router()
 
@@ -35,7 +35,7 @@ router.patch(
 )
 router.get(
     '/',
-    listUserValidator,
+    listTenantsValidator,
     (req: Request, res: Response, next: NextFunction) =>
         tenantController.getAll(req, res, next) as unknown as RequestHandler,
 )

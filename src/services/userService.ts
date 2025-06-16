@@ -36,7 +36,7 @@ export class UserService {
                 tenant: tenantId ? { id: tenantId } : undefined,
             })
         } catch (err) {
-            logger.error('Database save failed', err)
+            logger.error('Database save failed', err) // or console.error
             const error = createHttpError(
                 500,
                 `Failed to store the data in the database: ${(err as Error).message}`,
