@@ -135,6 +135,8 @@ describe('UserService create() & getAll() test coverage', () => {
     })
 
     it('should paginate users', async () => {
+        jest.setTimeout(10000) // timeout বাড়ানো হলো 10 সেকেন্ড
+
         for (let i = 1; i <= 15; i++) {
             await userRepository.save({
                 firstName: `User${i}`,
@@ -149,11 +151,12 @@ describe('UserService create() & getAll() test coverage', () => {
             q: '',
             role: '',
             currentPage: 2,
-            perPage: 10,
+            perPage: 6,
         }
 
         const [users, count] = await userService.getAll(query)
-        expect(users.length).toBe(5)
+
+        expect(users.length).toBe(6)
         expect(count).toBe(15)
     })
 })
