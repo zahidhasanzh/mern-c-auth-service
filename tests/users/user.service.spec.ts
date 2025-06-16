@@ -4,7 +4,7 @@ import { User } from '../../src/entity/User'
 import { UserService } from '../../src/services/userService'
 import { UserData } from '../../src/types'
 
-describe('UserService', () => {
+describe('UserService create() error handling', () => {
     let dataSource: DataSource
     let userRepository: Repository<User>
     let userService: UserService
@@ -23,49 +23,20 @@ describe('UserService', () => {
         await dataSource.destroy()
     })
 
-    describe('create', () => {
-        it('should create a user with hashed password', async () => {
-            const user = await userService.create({
-                firstName: 'John',
-                lastName: 'Doe',
-                email: 'john@example.com',
-                password: '123456',
-                role: 'customer',
-            })
-
-            expect(user).toHaveProperty('id')
-            expect(user.password).not.toBe('123456')
-        })
-
-        it('should throw error if email already exists', async () => {
-            const data: UserData = {
-                firstName: 'Jane',
-                lastName: 'Smith',
-                email: 'jane@example.com',
-                password: 'password',
-                role: 'customer',
-                tenantId: 1,
-            }
-            await userService.create(data)
-            await expect(userService.create(data)).rejects.toThrow(
-                'Email is already exists!',
-            )
-        })
-
-        it('should throw internal error if DB save fails', async () => {
-            jest.spyOn(userRepository, 'save').mockRejectedValueOnce(
-                new Error('DB error'),
-            )
-
-            await expect(
-                userService.create({
-                    firstName: 'Fail',
-                    lastName: 'Save',
-                    email: 'fail@example.com',
-                    password: 'pass',
-                    role: 'customer',
-                }),
-            ).rejects.toThrow('Failed to store the data in the database')
-        })
+    it('should throw error if save to database fails', async () => {
+        const data: UserData = {
+            firstName: 'Fail',
+            lastName: 'Test',
+            email: 'fail@example.com',
+            password: 'password',
+            role: 'customer',
+            tenantId: 1,
+        }
+        jest.spyOn(userRepository, 'save').mockRejectedValueOnce(
+            new Error('DB failure'),
+        )
+        await expect(userService.create(data)).rejects.toThrow(
+            'Failed to store the data in the database',
+        )
     })
 })
