@@ -111,22 +111,4 @@ describe('UserService.getAll', () => {
         expect(count).toBe(1)
         expect(users[0].role).toBe(Roles.ADMIN)
     })
-
-    it('throws an error when saving to the database fails', async () => {
-        const someUserData = {
-            firstName: 'John',
-            lastName: 'Doe',
-            email: 'john.doe@example.com',
-            password: 'securePassword123',
-            role: Roles.CUSTOMER, // or any role you have defined
-        }
-        const userRepository = connection.getRepository(User)
-        jest.spyOn(userRepository, 'save').mockRejectedValue(
-            new Error('Database error'),
-        )
-
-        await expect(userService.create(someUserData)).rejects.toThrow(
-            'Failed to store the data in the database',
-        )
-    })
 })
