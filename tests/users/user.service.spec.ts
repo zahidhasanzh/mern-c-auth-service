@@ -9,6 +9,7 @@ describe('UserService create() & getAll() test coverage', () => {
     let dataSource: DataSource
     let userRepository: Repository<User>
     let userService: UserService
+    jest.setTimeout(30000)
 
     beforeAll(async () => {
         dataSource = await AppDataSource.initialize()
@@ -135,8 +136,6 @@ describe('UserService create() & getAll() test coverage', () => {
     })
 
     it('should paginate users', async () => {
-        jest.setTimeout(30000)
-
         for (let i = 1; i <= 15; i++) {
             await userRepository.save({
                 firstName: `User${i}`,
