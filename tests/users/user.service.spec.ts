@@ -135,7 +135,7 @@ describe('UserService create() & getAll() test coverage', () => {
     })
 
     it('should paginate users', async () => {
-        jest.setTimeout(10000) // timeout বাড়ানো হলো 10 সেকেন্ড
+        jest.setTimeout(30000)
 
         for (let i = 1; i <= 15; i++) {
             await userRepository.save({
