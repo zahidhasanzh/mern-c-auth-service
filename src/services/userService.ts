@@ -34,7 +34,8 @@ export class UserService {
                 role,
                 tenant: tenantId ? { id: tenantId } : undefined,
             })
-        } catch {
+        } catch (_err) {
+            void _err
             const error = createHttpError(
                 500,
                 'Failed to store the data in the database',

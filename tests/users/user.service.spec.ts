@@ -25,7 +25,6 @@ describe('UserService create() & getAll() test coverage', () => {
         await dataSource.destroy()
     })
 
-    // Error handling test (already written)
     it('should throw error if save to database fails', async () => {
         const data: UserData = {
             firstName: 'Fail',
@@ -42,8 +41,6 @@ describe('UserService create() & getAll() test coverage', () => {
             'Failed to store the data in the database',
         )
     })
-
-    // ✅ Now write getAll() filter + search tests
 
     it('should return all users with pagination', async () => {
         await userRepository.save([
@@ -157,5 +154,20 @@ describe('UserService create() & getAll() test coverage', () => {
 
         expect(users.length).toBe(6)
         expect(count).toBe(15)
+    })
+
+    it('should delete user by id', async () => {
+        const userId = 123
+
+        // mock delete method to resolve with DeleteResult or similar
+        const deleteResult = { affected: 1 } // typeORM delete returns this kind of object
+        jest.spyOn(userRepository, 'delete').mockResolvedValue(
+            deleteResult as any,
+        )
+
+        const result = await userService.deleteById(userId)
+
+        expect(userRepository.delete).toHaveBeenCalledWith(userId)
+        expect(result).toBe(deleteResult)
     })
 })
