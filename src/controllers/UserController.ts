@@ -36,9 +36,6 @@ export class UserController {
     }
 
     async update(req: UpdateUserRequest, res: Response, next: NextFunction) {
-        // In our project: We are not allowing user to change the email id since it is used as username
-        // In our project: We are not allowing admin user to change others password
-
         // Validation
         const result = validationResult(req)
         if (!result.isEmpty()) {
