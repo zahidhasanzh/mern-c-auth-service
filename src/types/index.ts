@@ -34,7 +34,9 @@ export interface ITenant {
     name: string
     address: string
 }
-
+export interface CreateUserRequest extends Request {
+    body: UserData
+}
 export interface CreateTenantRequest extends Request {
     body: ITenant
 }
@@ -59,8 +61,4 @@ export interface UserQueryParams {
     currentPage: number
     q: string
     role: string
-}
-
-export interface CreateUserRequest extends Request {
-    body: UserData
 }
