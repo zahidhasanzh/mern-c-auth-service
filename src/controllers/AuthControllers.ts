@@ -128,6 +128,7 @@ export class AuthController {
             const payload: JwtPayload = {
                 sub: String(user.id),
                 role: user.role,
+                tenant: user.tenant ? String(user.tenant.id) : '',
             }
 
             const accessToken = this.tokenService.generateAccessToken(payload)
@@ -176,6 +177,7 @@ export class AuthController {
             const payload: JwtPayload = {
                 sub: req.auth.sub,
                 role: req.auth.role,
+                tenant: req.auth.tenant,
             }
 
             const accessToken = this.tokenService.generateAccessToken(payload)
