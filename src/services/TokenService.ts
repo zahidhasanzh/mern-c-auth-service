@@ -14,7 +14,7 @@ export class TokenService {
     ) {}
     generateAccessToken(payload: JwtPayload) {
         let privateKey: string
-        // let privateKey: Buffer
+        //let privateKey: Buffer
 
         if (!Config.PRIVATE_KEY) {
             const error = createHttpError(500, 'SECRET_KEY is not set')

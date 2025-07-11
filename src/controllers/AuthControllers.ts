@@ -51,6 +51,10 @@ export class AuthController {
             const payload: JwtPayload = {
                 sub: String(user.id),
                 role: user.role,
+                tenant: user.tenant ? String(user.tenant.id) : '',
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
             }
 
             const accessToken = this.tokenService.generateAccessToken(payload)
@@ -129,6 +133,9 @@ export class AuthController {
                 sub: String(user.id),
                 role: user.role,
                 tenant: user.tenant ? String(user.tenant.id) : '',
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
             }
 
             const accessToken = this.tokenService.generateAccessToken(payload)
@@ -178,6 +185,9 @@ export class AuthController {
                 sub: req.auth.sub,
                 role: req.auth.role,
                 tenant: req.auth.tenant,
+                firstName: req.auth.firstName,
+                lastName: req.auth.lastName,
+                email: req.auth.email,
             }
 
             const accessToken = this.tokenService.generateAccessToken(payload)
