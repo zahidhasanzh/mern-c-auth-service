@@ -8,6 +8,7 @@ import { TokenService } from '../services/TokenService'
 import createHttpError from 'http-errors'
 import { CredentialService } from '../services/credentialService'
 import { Roles } from '../constants'
+import { Config } from '../config'
 
 export class AuthController {
     constructor(
@@ -69,14 +70,14 @@ export class AuthController {
             })
 
             res.cookie('accessToken', accessToken, {
-                domain: 'localhost',
+                domain: Config.MAIN_DOMAIN,
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60, // 1h
                 httpOnly: true,
             })
 
             res.cookie('refreshToken', refreshToken, {
-                domain: 'localhost',
+                domain: Config.MAIN_DOMAIN,
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60 * 24 * 365, //1y
                 httpOnly: true,
@@ -150,14 +151,14 @@ export class AuthController {
             })
 
             res.cookie('accessToken', accessToken, {
-                domain: 'localhost',
+                domain: Config.MAIN_DOMAIN,
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60, // 1h
                 httpOnly: true,
             })
 
             res.cookie('refreshToken', refreshToken, {
-                domain: 'localhost',
+                domain: Config.MAIN_DOMAIN,
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60 * 24 * 365, //1y
                 httpOnly: true,
@@ -215,14 +216,14 @@ export class AuthController {
             })
 
             res.cookie('accessToken', accessToken, {
-                domain: 'localhost',
+                domain: Config.MAIN_DOMAIN,
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60, // 1h
                 httpOnly: true,
             })
 
             res.cookie('refreshToken', refreshToken, {
-                domain: 'localhost',
+                domain: Config.MAIN_DOMAIN,
                 sameSite: 'strict',
                 maxAge: 1000 * 60 * 60 * 24 * 365, //1y
                 httpOnly: true,
