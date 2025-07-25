@@ -10,7 +10,7 @@ import { globalErrorHandler } from './middlewares/globalErrorHandler'
 
 const app = express()
 
-const ALLOWED_DOMAINS = [Config.ADMIN_UI_DOMAIN]
+const ALLOWED_DOMAINS = [Config.CLIENT_UI_DOMAIN, Config.ADMIN_UI_DOMAIN]
 
 app.use(cors({ origin: ALLOWED_DOMAINS as string[], credentials: true }))
 app.use(express.static('public'))
