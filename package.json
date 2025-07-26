@@ -6,7 +6,7 @@
     "author": "Zahid Hassan <zahidhasanzh000@gmail.com>",
     "main": "index.js",
     "scripts": {
-        "dev": "cross-env NODE_ENV=production nodemon src/server.ts",
+        "dev": "cross-env NODE_ENV=dev nodemon src/server.ts",
         "build": "tsc",
         "format:fix": "prettier . --write",
         "format:check": "prettier . --check",

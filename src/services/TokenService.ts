@@ -5,27 +5,27 @@ import { User } from '../entity/User'
 import { RefreshToken } from '../entity/RefreshToken'
 import { Repository } from 'typeorm'
 
-// import fs from 'fs'
-// import path from 'path'
+import fs from 'fs'
+import path from 'path'
 
 export class TokenService {
     constructor(
         private readonly refreshTokenRepository: Repository<RefreshToken>,
     ) {}
     generateAccessToken(payload: JwtPayload) {
-        let privateKey: string
-        //let privateKey: Buffer
+        // let privateKey: string
+        let privateKey: Buffer
 
-        if (!Config.PRIVATE_KEY) {
-            const error = createHttpError(500, 'SECRET_KEY is not set')
-            throw error
-        }
+        // if (!Config.PRIVATE_KEY) {
+        //     const error = createHttpError(500, 'SECRET_KEY is not set')
+        //     throw error
+        // }
 
         try {
-            privateKey = Config.PRIVATE_KEY!
-            // privateKey = fs.readFileSync(
-            //     path.join(__dirname, '../../certs/private.pem'),
-            // )
+            // privateKey = Config.PRIVATE_KEY!
+            privateKey = fs.readFileSync(
+                path.join(__dirname, '../../certs/private.pem'),
+            )
         } catch {
             const error = createHttpError(
                 500,
